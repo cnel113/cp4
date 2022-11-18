@@ -6,8 +6,8 @@ import DisplayPiece from "./DisplayPiece.js"
 
 
 function ArtForm() {
-    const response = axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/1000")
-    const initialState = response;
+    //const response = axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/1000") Added to try to get setDisplayPiece working
+   // const initialState = response; Added to try to get setDisplayPiece working
     //Data from API:
     // object (individual piece of art)
     // objects (list of available objects)
@@ -22,8 +22,6 @@ function ArtForm() {
     const [error, setError] = useState("");
     const [results, setResults] = useState("");
 
-    setDisplayPiece(initialState);
-    
     var collectionSize = 0;
     
     const fetchArtCollection = async() => {
@@ -81,8 +79,7 @@ function ArtForm() {
     //fetchDisplayPiece();
     
         
-            //{colorBlocks} went under colorResults
-            //{this.renderDisplayPiece()} when I'm ready 
+            // add this back when ready <DisplayPiece artpiece={displayPiece}/>
             return (
                 <div className = "page">
                     {error}
@@ -93,7 +90,6 @@ function ArtForm() {
                         <input type="submit" value="Submit"/>
                     </form>
                     <div> {results}
-                        <DisplayPiece artpiece={displayPiece}/>
                     </div>
                 </div> 
             );
