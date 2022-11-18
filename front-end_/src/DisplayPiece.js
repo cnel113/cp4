@@ -3,19 +3,19 @@ import ReactDOM from "react-dom";
 
 function DisplayPiece(props){
     
-        //const [displayPiece, setDisplayPiece] = useState({});
-        //const str = JSON.stringify(displayPiece);
+        if (props.artpiece.data.artistDisplayName === "") {
+            props.artpiece.data.artistDisplayName = "Artist unknown";
+        }
         
-       // fetchDisplayPiece();
-        //console.log("In renderDisplayPiece");
-        //console.log("Displace Piece" + str);
+        if (props.artpiece.data.primaryImage === "") {
+            props.artpiece.data.primaryImage = "Image unavailable";
+        }
         
         return (
             <div>
-                <p>hello{props.artpiece.data.artistDisplayName}</p>
-                <img src={props.artpiece.data.primaryImage}/>
+                <p className="artist">{props.artpiece.data.artistDisplayName}</p>
+                <img className="artImg"src={props.artpiece.data.primaryImage}/>
             </div>
-        
         );
    
     }

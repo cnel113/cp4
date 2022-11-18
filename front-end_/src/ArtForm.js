@@ -17,21 +17,24 @@ function ArtForm() {
     //for the bigger lab I could expand out to the search function
     
     const [artIds, setArtCollection] = useState([]);
-    const [displayPiece, setDisplayPiece] = useState({});
+    const [displayPiece, setDisplayPiece] = useState({}); // 
     //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
     const [results, setResults] = useState("");
 
     var collectionSize = 0;
     
+    let displayPieceID = 1000;
+    
     const fetchArtCollection = async() => {
         try {
             const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects";
             const response = await axios.get(url);
-            console.log(response);
+            console.log("Fetching Collection" + response);
             setArtCollection(response.data.objectIDs);
             collectionSize = response.data.total;
             console.log("Collection Size" + collectionSize);
+            
         }
         catch(error) {
             setError("error retrieving art collection" + error);
@@ -44,10 +47,11 @@ function ArtForm() {
         //artistName is undefined before it can comeback and set the state here). apparantly setState is also async and only updates on the NEXT render but I need it for the intial render
         //In the debugger, after setDisplayPiece is called and the next lines execute displayPiece is still empty! Response isn't either. 
         try {
-            var objectID = 1000;
-            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + objectID;
+            //var objectID = 1112;
+            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + displayPieceID;
             const response = await axios.get(url);
             const str = JSON.stringify(response);
+            
             console.log("specific object response" + str);
             setDisplayPiece(response);
             const str2 = JSON.stringify(displayPiece);
@@ -83,13 +87,14 @@ function ArtForm() {
             return (
                 <div className = "page">
                     {error}
-                    <h1>Enjoy {collectionSize} of pieces of art from the Met</h1>
+                    {collectionSize != 0 ? <h1>Enjoy {collectionSize} pieces of art from the Met</h1> : <h1> Enjoy many pieces of art from the Met </h1>} 
                     <h3>Find your new favorite art </h3>
                     <form className="color-search" onSubmit={e => handleSubmit(e)}>
                         <legend>Search through the whole museum or a specific department</legend>
                         <input type="submit" value="Submit"/>
                     </form>
                     <div> {results}
+                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece}/> : <div></div>}
                     </div>
                 </div> 
             );
