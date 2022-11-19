@@ -1,24 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect} from 'react';
 
 function DisplayPiece(props){
     
         const [displayPiece, setDisplayPiece] = useState({});
         const [error, setError] = useState("");
-
     
         //const displayPieceID = useRef(0);
         
          const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
                 try {
-                    if (props.displayPieceID.current === 0) {
+                    /*if (props.displayPieceID.current === 0) {
                         //await setDisplayPieceID("1000");
                         props.displayPieceID.current = 1000;
                     }
+                   */
                    
-                    const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID.current;
+                   /*if (props.displayPieceID === 0) {
+                        //await setDisplayPieceID("1000");
+                        props.displayPieceID = 1000;
+                    }
+                   
+                   */
+                   
+                    const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;//props.displayPieceID.current
                     const response = await axios.get(url);
                     const str = JSON.stringify(response);
                     
@@ -44,6 +51,9 @@ function DisplayPiece(props){
                     setError("error retrieving art piece" + error);
                 }
             }
+            
+            
+            
         
         console.log("In display piece component");
         console.log(props);
@@ -53,7 +63,7 @@ function DisplayPiece(props){
        useEffect(() => { 
             
             fetchDisplayPiece();
-        }, [props.displayPieceID.current]);//pieceUpdated //
+        }, [props.displayPieceID]);//props.displayPieceID.current
         
         
         return (

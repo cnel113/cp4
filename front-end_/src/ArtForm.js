@@ -15,16 +15,16 @@ function ArtForm() {
     //for the bigger lab I could expand out to the search function
     
     const [artIds, setArtCollection] = useState([]);
-    const [displayPiece, setDisplayPiece] = useState({}); // 
+    //const [displayPiece, setDisplayPiece] = useState({}); // 
     //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
     const [results, setResults] = useState("");
     const [pieceUpdated, setPieceUpdated] = useState(true);
     const [collectionSize, setCollectionSize] = useState("");
-    //const [displayPieceID, setDisplayPieceID] = useState(1000);
+    const [displayPieceID, setDisplayPieceID] = useState(1000);
     const [saved, setSaved] = useState([]);
     
-    const displayPieceID = useRef(1000);
+    //const displayPieceID = useRef(0);
    //var collectionSize = 0;
     
     const fetchArtCollection = async() => {
@@ -45,14 +45,15 @@ function ArtForm() {
     
     const handleNext = (e) => {
         e.preventDefault();
-        displayPieceID.current = displayPieceID.current + 1;
+        setDisplayPieceID(displayPieceID + 1);
+        //displayPieceID.current = displayPieceID.current + 1;
         updatePiece();
     };
     
     const handlePrevious = (e) => {
         e.preventDefault();
         //displayPieceID = parseInt(displayPieceID) - 1;
-        displayPieceID.current = displayPieceID.current - 1;
+        //displayPieceID.current = displayPieceID.current - 1;
         updatePiece();
         //fetchDisplayPiece();
     }
@@ -96,7 +97,7 @@ function ArtForm() {
         }*/
     
         //fetchArtCollection(); put in its own use effect later
-    },[]); //pieceUpdated
+    },[displayPieceID]); //pieceUpdated
         
             // add this back when ready <DisplayPiece artpiece={displayPiece}/>
             return (
