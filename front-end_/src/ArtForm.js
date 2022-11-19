@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import DisplayPiece from "./DisplayPiece.js"
+import DisplayPiece from "./DisplayPiece.js";
 
 
-function ArtForm() {
-    //const response = axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/1000") Added to try to get setDisplayPiece working
-   // const initialState = response; Added to try to get setDisplayPiece working
+function ArtForm() { 
     //Data from API:
     // object (individual piece of art)
     // objects (list of available objects)
@@ -21,10 +19,16 @@ function ArtForm() {
     //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
     const [results, setResults] = useState("");
-
-    var collectionSize = 0;
+    const [pieceUpdated, setPieceUpdated] = useState(true);
+    const [collectionSize, setCollectionSize] = useState("");
+    //const [displayPieceID, setDisplayPieceID] = useState("");
+    const [saved, setSaved] = useState([]);
     
-    let displayPieceID = 1000;
+    const displayPieceID = useRef(0);
+    
+
+
+   //var collectionSize = 0;
     
     const fetchArtCollection = async() => {
         try {
@@ -32,7 +36,8 @@ function ArtForm() {
             const response = await axios.get(url);
             console.log("Fetching Collection" + response);
             setArtCollection(response.data.objectIDs);
-            collectionSize = response.data.total;
+            setCollectionSize(response.data.total);
+           // collectionSize = response.data.total;
             console.log("Collection Size" + collectionSize);
             
         }
@@ -41,19 +46,24 @@ function ArtForm() {
         }
     }
     
-     const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
+    const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
         //It looks like the problem is that it is not calling this function when it is in the useEffect function. 
         //Even when it gets to the setDisplayPiece (it doesn't ever execute if useEffect calls this because it skips ahead to the render and then 
         //artistName is undefined before it can comeback and set the state here). apparantly setState is also async and only updates on the NEXT render but I need it for the intial render
         //In the debugger, after setDisplayPiece is called and the next lines execute displayPiece is still empty! Response isn't either. 
         try {
-            //var objectID = 1112;
-            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + displayPieceID;
+            if (displayPieceID.current === 0) {
+                //await setDisplayPieceID("1000");
+                displayPieceID.current = 1000;
+            }
+           
+            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + displayPieceID.current;
             const response = await axios.get(url);
             const str = JSON.stringify(response);
             
             console.log("specific object response" + str);
             setDisplayPiece(response);
+            //pieceUpdated = true;
             const str2 = JSON.stringify(displayPiece);
             console.log("display piece " + str2);
             return(response);
@@ -64,21 +74,65 @@ function ArtForm() {
     }
     
     
-    const handleSubmit = async(e) => {
+    const handleNext = (e) => {
+        e.preventDefault();
+        //let newID = parseInt(displayPieceID) + 1;
+         //displayPieceID = parseInt(displayPieceID) + 1;
+        //await setDisplayPieceID(toString(newID));
+        displayPieceID.current = displayPieceID.current + 1;
+        updatePiece();
+        //fetchDisplayPiece();
+
+    }
+    
+    const handlePrevious = (e) => {
+        e.preventDefault();
+        //displayPieceID = parseInt(displayPieceID) - 1;
+        displayPieceID.current = displayPieceID.current - 1;
+        updatePiece();
+        //fetchDisplayPiece();
+    }
+    
+    
+    const updatePiece = () => {
+        setPieceUpdated(true);
+        }
+    
+    
+    /*const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            fetchDisplayPiece();
+            //fetchDisplayPiece();
         }
         catch {
             
         }
     }
+    */
+    
+    const addSave = async(e) => { //Need to learn how to connect this to another component
+        e.preventDefault();
+        
+        try {
+            await axios.post("/api/saved", {displayPieceID});
+
+        }
+        catch(error) {
+            setError("Error saving item " + error);
+        }
+    }
     
     
     useEffect(() => { //calls these functions when you first start the page
-        fetchDisplayPiece();
-        fetchArtCollection();
-    },[]);
+    
+        if (pieceUpdated) {
+            console.log("Inside updating piece");
+            fetchDisplayPiece();
+            setPieceUpdated(false);
+        }
+    
+        //fetchArtCollection(); put in its own use effect later
+    },[pieceUpdated]);
     
     //fetchDisplayPiece();
     
@@ -87,17 +141,29 @@ function ArtForm() {
             return (
                 <div className = "page">
                     {error}
-                    {collectionSize != 0 ? <h1>Enjoy {collectionSize} pieces of art from the Met</h1> : <h1> Enjoy many pieces of art from the Met </h1>} 
+                    {collectionSize !== 0 ? <h1>Enjoy {collectionSize} pieces of art from the Met</h1> : <h1> Enjoy many pieces of art from the Met </h1>} 
                     <h3>Find your new favorite art </h3>
-                    <form className="color-search" onSubmit={e => handleSubmit(e)}>
+                    <form className="art-search">
                         <legend>Search through the whole museum or a specific department</legend>
-                        <input type="submit" value="Submit"/>
+                        
                     </form>
                     <div> {results}
-                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece}/> : <div></div>}
+                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
+                        <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a>
+                        <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a>
+                        <button className="save" onClick={e => addSave(e)}>Save</button>
                     </div>
                 </div> 
             );
     }
-export default ArtForm;
+export default ArtForm; 
+
+//                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
+
+// {displayPieceID.current != 0 ? <DisplayPiece displayPieceID={displayPieceID}/> : <div></div>}
+
+
+// {displayPieceID.current != 0 ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
+//<input type="submit" value="Submit"/>
+//onSubmit={e => handleSubmit(e)}
     
