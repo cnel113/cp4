@@ -14,8 +14,6 @@ function ArtForm() {
     // For this lab, I think I will make a basic viewer where you can scroll through the art work, 
     //for the bigger lab I could expand out to the search function
     
-    const [artIds, setArtCollection] = useState([]);
-    //const [displayPiece, setDisplayPiece] = useState({}); // 
     //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
     const [results, setResults] = useState("");
@@ -23,17 +21,23 @@ function ArtForm() {
     const [collectionSize, setCollectionSize] = useState("");
     const [displayPieceID, setDisplayPieceID] = useState(437133);
     const [saved, setSaved] = useState([]);
+    const [collection, setCollection] = useState([]);
+
+    const currentIndex = useRef(0);
     
-    //const displayPieceID = useRef(0);
-   //var collectionSize = 0;
+    //Get next id, indexes through my list from the collection
     
     const fetchArtCollection = async() => {
         try {
             const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects";
             const response = await axios.get(url);
-            console.log("Fetching Collection" + response);
-            setArtCollection(response.data.objectIDs);
+            console.log("Fetching Collection");
+            console.log(response);
+            setCollection(response.data.objectIDs);
+            console.log(response.data.objectIDs);
             setCollectionSize(response.data.total);
+           // console.log("collection");
+            //console.log(collection);
            // collectionSize = response.data.total;
             console.log("Collection Size" + collectionSize);
             
@@ -43,19 +47,31 @@ function ArtForm() {
         }
     };
     
+    function updateIndex() {
+        if (currentIndex < collection.length) {
+            currentIndex = currentIndex + 1;
+            return currentIndex;
+        }
+        else {
+            return currentIndex;
+        }
+    }
+    
+    
+    
     const handleNext = (e) => {
         e.preventDefault();
-        setDisplayPieceID(displayPieceID + 1);
-        //displayPieceID.current = displayPieceID.current + 1;
-        updatePiece();
+        console.log("In next print collection");
+        console.log(collection);
+        updateIndex();
+    
+        setDisplayPieceID(collection[currentIndex]);
+        //updatePiece();
     };
     
     const handlePrevious = (e) => {
         e.preventDefault();
-        //displayPieceID = parseInt(displayPieceID) - 1;
-        //displayPieceID.current = displayPieceID.current - 1;
         updatePiece();
-        //fetchDisplayPiece();
     }
     
     
@@ -98,8 +114,11 @@ function ArtForm() {
     
         //fetchArtCollection(); put in its own use effect later
     },[displayPieceID]); //pieceUpdated
-        
-            // add this back when ready <DisplayPiece artpiece={displayPiece}/>
+    
+    useEffect(() => {
+        fetchArtCollection();
+    },[]);
+    
             return (
                 <div className = "page">
                     {error}
