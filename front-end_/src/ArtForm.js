@@ -21,7 +21,7 @@ function ArtForm() {
     const [results, setResults] = useState("");
     const [pieceUpdated, setPieceUpdated] = useState(true);
     const [collectionSize, setCollectionSize] = useState("");
-    const [displayPieceID, setDisplayPieceID] = useState(1000);
+    const [displayPieceID, setDisplayPieceID] = useState(437133);
     const [saved, setSaved] = useState([]);
     
     //const displayPieceID = useRef(0);

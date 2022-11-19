@@ -9,6 +9,16 @@ function DisplayPiece(props){
         const [error, setError] = useState("");
     
         //const displayPieceID = useRef(0);
+    
+        function fetchAndSetDisplayPiece() {
+            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;//props.displayPieceID.current
+            const response =  axios.get(url);
+            const str = JSON.stringify(response);
+            //setDisplayPiece(response);
+            //console.log("api repsonse " + str);
+            return response;
+        }
+        
         
          const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
                 try {
@@ -25,16 +35,25 @@ function DisplayPiece(props){
                    
                    */
                    
-                    const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;//props.displayPieceID.current
+                   /* const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;//props.displayPieceID.current
                     const response = await axios.get(url);
-                    const str = JSON.stringify(response);
+                    const str = JSON.stringify(response); */
                     
-                    console.log("specific object response" + str);
-                    await setDisplayPiece(response);
-                    //props.updatePiece();
+                    fetchAndSetDisplayPiece().then (
+                        (response) => {
+                            console.log(response);
+                            setDisplayPiece(response);
+                            return response;
+                        }
+                    );
+                    
+                   /* console.log("specific object response" + str);
+                    setDisplayPiece(response);
                     const str2 = JSON.stringify(displayPiece);
                     console.log("display piece " + str2);
+                    */
                     
+                    /*
                     
                      if (displayPiece.data.artistDisplayName === "") {
                         displayPiece.data.artistDisplayName = "Artist unknown";
@@ -43,33 +62,60 @@ function DisplayPiece(props){
                     if (displayPiece.data.primaryImage === "") {
                         displayPiece.data.primaryImage = "Image unavailable";
                     }
-        
+                    */
                     
-                    return(response);
+                    //return(response);
                 }
+                
                 catch(error) {
                     setError("error retrieving art piece" + error);
                 }
-            }
-            
-            
-            
+            };
         
-        console.log("In display piece component");
+        /*console.log("In display piece component");
         console.log(props);
         
-        console.log("Inside use effect");
+        console.log("Inside use effect");*/
+        
+        
+        /*const handleSetDisplayPiece = async() => {
+            // console.log("specific object response" + str);
+            //let response = fetchDisplayPiece();
+            
+            /*setDisplayPiece(response);
+            const str2 = JSON.stringify(displayPiece);
+            console.log("display piece " + str2);*/
+            
+            /*const response = await fetchDisplayPiece(); 
+            
+            const responsedp = await setDisplayPiece(response);
+    
+                    
+            if (displayPiece.data.artistDisplayName === "") {
+                displayPiece.data.artistDisplayName = "Artist unknown";
+            }
+        
+            if (displayPiece.data.primaryImage === "") {
+                 displayPiece.data.primaryImage = "Image unavailable";
+            }
+        };
+        */
+        
+        //fetchDisplayPiece().then(response => handleSetDisplayPiece(response));
         
        useEffect(() => { 
             
             fetchDisplayPiece();
+            //handleSetDisplayPiece();
+            //fetchAndSetDisplayPiece();
         }, [props.displayPieceID]);//props.displayPieceID.current
+        
         
         
         return (
            <div>
            {error}
-                {displayPiece.data ? <p className="artist">{displayPiece.data.artistDisplayName}</p> : <p> loading </p>}
+                {displayPiece.data  ? <p className="artist">{displayPiece.data.artistDisplayName}</p> : <p> artist unknown </p>}
                 {displayPiece.data ? <img className="artImg"src={displayPiece.data.primaryImage}/> : <p> loading </p>}
             </div> 
         );
