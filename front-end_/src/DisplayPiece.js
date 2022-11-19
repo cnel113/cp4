@@ -42,7 +42,17 @@ function DisplayPiece(props){
                     fetchAndSetDisplayPiece().then (
                         (response) => {
                             console.log(response);
+                            
+                             if (response.data.artistDisplayName === "") {
+                                response.data.artistDisplayName = "Artist unknown";
+                            }
+                
+                            if (response.data.primaryImage === "") {
+                                response.data.primaryImage = "Image unavailable";
+                            }
+                            
                             setDisplayPiece(response);
+                            
                             return response;
                         }
                     );
