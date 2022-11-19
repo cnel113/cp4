@@ -9,17 +9,9 @@ function DisplayPiece(props){
         const [error, setError] = useState("");
 
     
-        if (props.artpiece.data.artistDisplayName === "") {
-            props.artpiece.data.artistDisplayName = "Artist unknown";
-        }
-        
-        if (props.artpiece.data.primaryImage === "") {
-            props.artpiece.data.primaryImage = "Image unavailable";
-        }
-        
         //const displayPieceID = useRef(0);
         
-         /*const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
+         const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
                 try {
                     if (props.displayPieceID.current === 0) {
                         //await setDisplayPieceID("1000");
@@ -32,16 +24,26 @@ function DisplayPiece(props){
                     
                     console.log("specific object response" + str);
                     await setDisplayPiece(response);
-                    props.updatePiece();
+                    //props.updatePiece();
                     const str2 = JSON.stringify(displayPiece);
                     console.log("display piece " + str2);
+                    
+                    
+                     if (displayPiece.data.artistDisplayName === "") {
+                        displayPiece.data.artistDisplayName = "Artist unknown";
+                    }
+        
+                    if (displayPiece.data.primaryImage === "") {
+                        displayPiece.data.primaryImage = "Image unavailable";
+                    }
+        
+                    
                     return(response);
                 }
                 catch(error) {
                     setError("error retrieving art piece" + error);
                 }
             }
-            */
         
         console.log("In display piece component");
         console.log(props);
@@ -49,20 +51,16 @@ function DisplayPiece(props){
         console.log("Inside use effect");
         
        useEffect(() => { 
-            if (props.pieceUpdated) {
-                console.log("Inside updating piece");
-
-                //setPieceUpdated(false);
-            }
             
-            //fetchDisplayPiece();
-        }, [props.displayPieceID.current]);//pieceUpdated
+            fetchDisplayPiece();
+        }, [props.displayPieceID.current]);//pieceUpdated //
         
         
         return (
            <div>
-                <p className="artist">{props.artpiece.data.artistDisplayName}</p>
-                <img className="artImg"src={props.artpiece.data.primaryImage}/>
+           {error}
+                {displayPiece.data ? <p className="artist">{displayPiece.data.artistDisplayName}</p> : <p> loading </p>}
+                {displayPiece.data ? <img className="artImg"src={displayPiece.data.primaryImage}/> : <p> loading </p>}
             </div> 
         );
         

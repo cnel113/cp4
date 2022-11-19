@@ -21,13 +21,10 @@ function ArtForm() {
     const [results, setResults] = useState("");
     const [pieceUpdated, setPieceUpdated] = useState(true);
     const [collectionSize, setCollectionSize] = useState("");
-    //const [displayPieceID, setDisplayPieceID] = useState("");
+    //const [displayPieceID, setDisplayPieceID] = useState(1000);
     const [saved, setSaved] = useState([]);
     
-    const displayPieceID = useRef(0);
-    
-
-
+    const displayPieceID = useRef(1000);
    //var collectionSize = 0;
     
     const fetchArtCollection = async() => {
@@ -44,46 +41,13 @@ function ArtForm() {
         catch(error) {
             setError("error retrieving art collection" + error);
         }
-    }
-    
-    const fetchDisplayPiece = async() => {  //    function fetchDisplayPiece() {
-        //It looks like the problem is that it is not calling this function when it is in the useEffect function. 
-        //Even when it gets to the setDisplayPiece (it doesn't ever execute if useEffect calls this because it skips ahead to the render and then 
-        //artistName is undefined before it can comeback and set the state here). apparantly setState is also async and only updates on the NEXT render but I need it for the intial render
-        //In the debugger, after setDisplayPiece is called and the next lines execute displayPiece is still empty! Response isn't either. 
-        try {
-            if (displayPieceID.current === 0) {
-                //await setDisplayPieceID("1000");
-                displayPieceID.current = 1000;
-            }
-           
-            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + displayPieceID.current;
-            const response = await axios.get(url);
-            const str = JSON.stringify(response);
-            
-            console.log("specific object response" + str);
-            setDisplayPiece(response);
-            //pieceUpdated = true;
-            const str2 = JSON.stringify(displayPiece);
-            console.log("display piece " + str2);
-            return(response);
-        }
-        catch(error) {
-            setError("error retrieving art piece" + error);
-        }
-    }
-    
+    };
     
     const handleNext = (e) => {
         e.preventDefault();
-        //let newID = parseInt(displayPieceID) + 1;
-         //displayPieceID = parseInt(displayPieceID) + 1;
-        //await setDisplayPieceID(toString(newID));
         displayPieceID.current = displayPieceID.current + 1;
         updatePiece();
-        //fetchDisplayPiece();
-
-    }
+    };
     
     const handlePrevious = (e) => {
         e.preventDefault();
@@ -123,19 +87,16 @@ function ArtForm() {
     }
     
     
-    useEffect(() => { //calls these functions when you first start the page
+    useEffect(() => {
     
-        if (pieceUpdated) {
+        /*if (pieceUpdated) {
             console.log("Inside updating piece");
             fetchDisplayPiece();
             setPieceUpdated(false);
-        }
+        }*/
     
         //fetchArtCollection(); put in its own use effect later
-    },[pieceUpdated]);
-    
-    //fetchDisplayPiece();
-    
+    },[]); //pieceUpdated
         
             // add this back when ready <DisplayPiece artpiece={displayPiece}/>
             return (
@@ -148,7 +109,7 @@ function ArtForm() {
                         
                     </form>
                     <div> {results}
-                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
+                        <DisplayPiece displayPieceID={displayPieceID}/>
                         <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a>
                         <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a>
                         <button className="save" onClick={e => addSave(e)}>Save</button>
