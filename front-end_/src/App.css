@@ -57,10 +57,87 @@ a:hover {
 }
 
 .next {
-  background-color: #04AA6D;
+  background-color: #7DC8CA;
   color: white;
 }
 
 .round {
   border-radius: 50%;
+}
+
+.subtitle {
+  font-weight: normal;
+  font-size: 1.3em;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #EBECF0;
+    padding: 1.5em;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.footer-container h4, a{
+    color: black;
+}
+
+.footer-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 1.5em;
+}
+
+@media only screen and (min-width: 961px) {
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.displayPiece {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist {
+  font-weight: bold;
+  color: #7DC8CA;
+  font-size: 1.75em;
+}
+
+.title {
+  color: #7DC8CA;
+  font-size: 1.25em;
+}
+
+.description {
+  color: #808080;
+  font-size: .75em;
+}
+
+.art-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }

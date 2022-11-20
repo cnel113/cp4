@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import axios from 'axios';
 import { useState, useEffect} from 'react';
 
@@ -15,20 +13,19 @@ function Saved(props) {
     catch(error) {
       setError("error retrieving saved items: " + error);
     }
-  }
+  };
   
    useEffect(() => {
      fetchSaved();
     },[props.numSaved]); 
     
     useEffect(() => {
-    },[savedItems])
+    },[savedItems]);
     
   
   return (
     <div>
-    {error}
-      <h1> Saved Items </h1>
+      <h2> Saved Items </h2>
         {savedItems?.map(artPiece => (
           <div key={artPiece.artID} className="saved">
               <p>{artPiece.name}</p>
@@ -42,14 +39,3 @@ function Saved(props) {
 }
 
 export default Saved;
-
-//{saved.saved ?   : <p> No Saved Items </p>}  
-
-/*
-   {saved.saved.map(artPiece => (
-        <div key={artPiece.artID} className="saved">
-            <p>{artPiece.name}</p>
-            <p>{artPiece.artist}</p>
-            <img src={artPiece.imgURL}/>
-        </div>
-      ))}   */

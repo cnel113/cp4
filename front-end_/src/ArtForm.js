@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Saved from "./Saved.js";
@@ -7,20 +5,8 @@ import DisplayPiece from "./DisplayPiece.js";
 
 
 function ArtForm() { 
-    //Data from API:
-    // object (individual piece of art)
-    // objects (list of available objects)
-    // Deparments. array with department ids and the department names
-    // Search function
-    // For this lab, I think I will make a basic viewer where you can scroll through the art work, 
-    //for the bigger lab I could expand out to the search function
-    
-    //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
-    const [pieceUpdated, setPieceUpdated] = useState(true);
-    const [collectionSize, setCollectionSize] = useState("");
     const [displayPieceID, setDisplayPieceID] = useState(2000);
-    const [theDisplayPiece, setTheDisplayPiece] = useState({});
     const [collection, setCollection] = useState([]);
     const currentIndex = useRef(-1);
     const [numSaved, setNumSaved]= useState(0);
@@ -100,31 +86,16 @@ function ArtForm() {
     };
     
     
-    /*const handleSubmit = (e) => {
-        e.preventDefault();
-        try {
-            //fetchDisplayPiece();
-        }
-        catch {
-            
-        }
-    }
-    */
-    
     const clearSaved = async() => {
         try {
           await axios.delete("/api/saved");
         } catch(error) {
           setError("error clearing all saved " + error);
         }
-    }
-    
-    const getDisplyPieceData = (dataFromDP) => {
-        setTheDisplayPiece({response: dataFromDP});
     };
     
-    function addSave()  { //Need to learn how to connect this to another component
-       // numSaved.current = numSaved.current + 1;
+   
+    function addSave()  { 
         setNumSaved(numSaved + 1);
         
     };  
@@ -142,31 +113,22 @@ function ArtForm() {
     
     return (
         <div className = "page">
-            {error}
-            {collectionSize !== 0 ? <h1>Enjoy {collectionSize} pieces of art from the Met</h1> : <h1> Enjoy many pieces of art from the Met </h1>} 
-            <h3>Find your new favorite art </h3>
+            <h1>Enjoy art from the Met</h1>
+            <p className="subtitle">Explore to find your new favorite art</p>
             <form className="art-search">
-                <legend>Search through the whole museum or a specific department</legend>
             </form>
-            <div> 
+            <div className="art-results"> 
                 <DisplayPiece displayPieceID={displayPieceID} numSaved={numSaved}/>
-               {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading data </p>}
-                {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading data </p>}
-                {collection.length != 0 ? <button className="save" onClick={e => addSave(e)}>Save</button> : <p> loading button </p>}
-                <Saved numSaved={numSaved}/>
+                
             </div> 
+            <div className="search-buttons"> 
+                {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading button </p>}
+                {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading button </p>}
+                {collection.length != 0 ? <button className="save" onClick={e => addSave(e)}>Save</button> : <p> loading button </p>}
+            </div>
+            <Saved numSaved={numSaved}/>
         </div> 
     );
 }
 
 export default ArtForm; 
-
-//                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
-
-// {displayPieceID.current != 0 ? <DisplayPiece displayPieceID={displayPieceID}/> : <div></div>}
-
-
-// {displayPieceID.current != 0 ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}
-//<input type="submit" value="Submit"/>
-//onSubmit={e => handleSubmit(e)}
-    

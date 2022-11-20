@@ -1,15 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 class Footer extends React.Component {
     render () {
         return (  
         <div className='footer-container'>
             <div className='footer-list'>
-                <h4>Designer Tools</h4>
-                <a href="">Color Wheel</a>
-                <a href="">Tips & Tricks</a>
-                <a href="">Color Conversions</a>
+                <h4>Searching Tools</h4>
+                <a href="">Art History</a>
+                <a href="">Art Departments</a>
+                <a href="">Art Timeline</a>
             </div>
             <div className='footer-list'>
                 <h4>Help</h4>
