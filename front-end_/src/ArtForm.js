@@ -16,17 +16,13 @@ function ArtForm() {
     
     //const [deptIds, setDeptList] = useState([]); //calls API once and then stores list in backend to make future calls to 
     const [error, setError] = useState("");
-    const [results, setResults] = useState("");
     const [pieceUpdated, setPieceUpdated] = useState(true);
     const [collectionSize, setCollectionSize] = useState("");
     const [displayPieceID, setDisplayPieceID] = useState(2000);
-    const [saved, setSaved] = useState([]);
     const [collection, setCollection] = useState([]);
-    
     const currentIndex = useRef(-1);
     
-    //Get next id, indexes through my list from the collection
-    
+
     function fetchArtCollection() {
         try {
             const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects";
@@ -87,21 +83,18 @@ function ArtForm() {
         } 
       
         increaseIndex(); 
-    
-    
         setDisplayPieceID(collection[currentIndex.current]);
     };
     
     const handlePrevious = (e) => {
        e.preventDefault();
         console.log("In previous");
+        if (currentIndex.current === -1) {
+            const index = collection.findIndex(element => element === 2000);
+            currentIndex.current = index;
+        } 
         decreaseIndex();
         setDisplayPieceID(collection[currentIndex.current]);
-    };
-    
-    
-    const updatePiece = () => {
-        setPieceUpdated(true);
     };
     
     
@@ -116,17 +109,13 @@ function ArtForm() {
     }
     */
     
-    const addSave = async(e) => { //Need to learn how to connect this to another component
-        e.preventDefault();
+    const clearSaved = async() => {
         try {
-            await axios.post("/api/saved", {displayPieceID});
-
-        }
-        catch(error) {
-            setError("Error saving item " + error);
+          await axios.delete("/api/saved");
+        } catch(error) {
+          setError("error clearing all saved " + error);
         }
     }
-    
     
     useEffect(() => {
         
@@ -134,6 +123,7 @@ function ArtForm() {
     
     useEffect(() => {
         handleFetchCollection();
+        //clearSaved(); //NOT SURE IF THIS WILL CAUSE BUGS LATER
     },[]);
     
     return (
@@ -144,15 +134,15 @@ function ArtForm() {
             <form className="art-search">
                 <legend>Search through the whole museum or a specific department</legend>
             </form>
-            <div> {results}
+            <div> 
                 <DisplayPiece displayPieceID={displayPieceID}/>
                {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading data </p>}
                 {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading data </p>}
-                <button className="save" onClick={e => addSave(e)}>Save</button>
             </div> 
         </div> 
     );
 }
+
 export default ArtForm; 
 
 //                        {displayPiece.data ? <DisplayPiece artpiece={displayPiece} displayPieceID={displayPieceID}/> : <div></div>}

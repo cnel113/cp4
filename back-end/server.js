@@ -23,6 +23,9 @@ mongoose.connect('mongodb://localhost:27017/test', {
 
   const savedArtSchema = new mongoose.Schema ({
     artID: Number,
+    name: String,
+    artist: String,
+    imgURL: String,
   });
   
   const SavedArt = mongoose.model('SavedArt', savedArtSchema);
@@ -38,9 +41,12 @@ mongoose.connect('mongodb://localhost:27017/test', {
     }
   });
   
-  app.post('/api/saved/:id', async (req, res) => { //adds random string as ID
+  app.post('/api/saved/', async (req, res) => { //adds random string as ID
     const saved = new SavedArt({
-    artID: req.params.id, //not sure if this line is correct
+    artID: req.body.artID, //not sure if this line is correct
+    name: req.body.name,
+    artist: req.body.artist,
+    imgURL: req.body.imgURL,
   });
     try {
       await saved.save();
@@ -56,6 +62,16 @@ mongoose.connect('mongodb://localhost:27017/test', {
       await SavedArt.deleteOne({
         artID: req.params.id
       });
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+  
+  app.delete('/api/saved/', async (req, res) => {
+    try {
+      await SavedArt.deleteMany();
       res.sendStatus(200);
     } catch (error) {
       console.log(error);
@@ -81,7 +97,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
     }
   });
   
-  app.post('/api/collection/:id', async (req, res) => { //adds random string as ID
+  app.post('/api/collection/:id', async (req, res) => { //adds random string as ID //Have artID checking so you don't add the same thing twice
     const collection = new ArtPiece({
     artID: req.params.id,
   });
