@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Saved from "./Saved.js";
 import DisplayPiece from "./DisplayPiece.js";
 
 
@@ -19,8 +20,11 @@ function ArtForm() {
     const [pieceUpdated, setPieceUpdated] = useState(true);
     const [collectionSize, setCollectionSize] = useState("");
     const [displayPieceID, setDisplayPieceID] = useState(2000);
+    const [theDisplayPiece, setTheDisplayPiece] = useState({});
     const [collection, setCollection] = useState([]);
     const currentIndex = useRef(-1);
+    const numSaved = useRef(0);
+ 
     
 
     function fetchArtCollection() {
@@ -117,13 +121,29 @@ function ArtForm() {
         }
     }
     
+    const getDisplyPieceData = (dataFromDP) => {
+        setTheDisplayPiece({response: dataFromDP});
+    };
+    
+    const addSave = async(e) => { //Need to learn how to connect this to another component
+        e.preventDefault();           
+        try {
+            await axios.post("/api/saved", {artID: displayPieceID, name: theDisplayPiece.data.title, artist: theDisplayPiece.data.artistDisplayName, imgURL: theDisplayPiece.data.primaryImageSmall});
+            numSaved.current = numSaved.current + 1;
+        }
+        catch(error) {
+            setError("Error saving item " + error);
+        }
+    };  
+    
     useEffect(() => {
         
     },[displayPieceID, collection.length]);
     
+    
     useEffect(() => {
         handleFetchCollection();
-        //clearSaved(); //NOT SURE IF THIS WILL CAUSE BUGS LATER
+        clearSaved(); //NOT SURE IF THIS WILL CAUSE BUGS LATER
     },[]);
     
     return (
@@ -135,9 +155,12 @@ function ArtForm() {
                 <legend>Search through the whole museum or a specific department</legend>
             </form>
             <div> 
-                <DisplayPiece displayPieceID={displayPieceID}/>
+                <DisplayPiece displayPieceID={displayPieceID} callback={getDisplyPieceData}/>
                {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading data </p>}
                 {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading data </p>}
+                
+                <button className="save" onClick={e => addSave(e)}>Save</button>
+                <Saved numItems={numSaved.current}/>
             </div> 
         </div> 
     );

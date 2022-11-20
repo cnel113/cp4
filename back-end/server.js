@@ -30,10 +30,38 @@ mongoose.connect('mongodb://localhost:27017/test', {
   
   const SavedArt = mongoose.model('SavedArt', savedArtSchema);
   
+  let newSavedData = false;
+  
+  function pollDOM () {
+    if (newSavedData) {
+      // Do something with el
+      
+    } else {
+      setTimeout(pollDOM, 300); // try again in 300 milliseconds
+    }
+  }
+  
+  pollDOM();
+  
   app.get('/api/saved', async(req, res) => {
+    async function pollDOM () {
+          if (newSavedData) {
+            // Do something with el
+            console.log("reading saved data");
+            let saved = await SavedArt.find();
+             res.send({saved: saved});
+            newSavedData = false;
+            
+          } else {
+            console.log("started waiting");
+            setTimeout(pollDOM, 10000); // try again in 300 milliseconds
+            console.log("finished waiting");
+          }
+        }
+        
     try {
-      let saved = await SavedArt.find();
-      res.send({saved: saved});
+      await pollDOM();
+      
     }
     catch(error) {
       console.log(error);
@@ -42,6 +70,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
   });
   
   app.post('/api/saved/', async (req, res) => { //adds random string as ID
+    newSavedData = true;
     const saved = new SavedArt({
     artID: req.body.artID, //not sure if this line is correct
     name: req.body.name,
