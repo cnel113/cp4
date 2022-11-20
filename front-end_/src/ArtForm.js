@@ -23,9 +23,7 @@ function ArtForm() {
     const [theDisplayPiece, setTheDisplayPiece] = useState({});
     const [collection, setCollection] = useState([]);
     const currentIndex = useRef(-1);
-    const numSaved = useRef(0);
- 
-    
+    const [numSaved, setNumSaved]= useState(0);
 
     function fetchArtCollection() {
         try {
@@ -125,20 +123,16 @@ function ArtForm() {
         setTheDisplayPiece({response: dataFromDP});
     };
     
-    const addSave = async(e) => { //Need to learn how to connect this to another component
-        e.preventDefault();           
-        try {
-            await axios.post("/api/saved", {artID: displayPieceID, name: theDisplayPiece.data.title, artist: theDisplayPiece.data.artistDisplayName, imgURL: theDisplayPiece.data.primaryImageSmall});
-            numSaved.current = numSaved.current + 1;
-        }
-        catch(error) {
-            setError("Error saving item " + error);
-        }
+    function addSave()  { //Need to learn how to connect this to another component
+       // numSaved.current = numSaved.current + 1;
+        setNumSaved(numSaved + 1);
+        
     };  
+    
     
     useEffect(() => {
         
-    },[displayPieceID, collection.length]);
+    },[displayPieceID, collection.length], numSaved);
     
     
     useEffect(() => {
@@ -155,12 +149,11 @@ function ArtForm() {
                 <legend>Search through the whole museum or a specific department</legend>
             </form>
             <div> 
-                <DisplayPiece displayPieceID={displayPieceID} callback={getDisplyPieceData}/>
+                <DisplayPiece displayPieceID={displayPieceID} numSaved={numSaved}/>
                {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading data </p>}
                 {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading data </p>}
-                
-                <button className="save" onClick={e => addSave(e)}>Save</button>
-                <Saved numItems={numSaved.current}/>
+                {collection.length != 0 ? <button className="save" onClick={e => addSave(e)}>Save</button> : <p> loading button </p>}
+                <Saved numSaved={numSaved}/>
             </div> 
         </div> 
     );

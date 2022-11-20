@@ -19,7 +19,11 @@ function Saved(props) {
   
    useEffect(() => {
      fetchSaved();
-    },[props.numItems]); //Propably need to figure out a prop to send this to tell it to rerender when a new page pulls up
+    },[props.numSaved]); 
+    
+    useEffect(() => {
+    },[savedItems])
+    
   
   return (
     <div>

@@ -53,9 +53,9 @@ mongoose.connect('mongodb://localhost:27017/test', {
             newSavedData = false;
             
           } else {
-            console.log("started waiting");
-            setTimeout(pollDOM, 10000); // try again in 300 milliseconds
-            console.log("finished waiting");
+            //console.log("started waiting");
+            setTimeout(pollDOM, 3); // try again in 300 milliseconds
+            //console.log("finished waiting");
           }
         }
         
@@ -71,6 +71,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
   
   app.post('/api/saved/', async (req, res) => { //adds random string as ID
     newSavedData = true;
+    console.log("recieved new data");
     const saved = new SavedArt({
     artID: req.body.artID, //not sure if this line is correct
     name: req.body.name,

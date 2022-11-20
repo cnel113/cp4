@@ -36,19 +36,19 @@ function DisplayPiece(props){
                             }
                             
                             if (response.data.culture === "") {
-                                response.data.culture = "culture unknown";
+                                response.data.culture = "(culture unknown)";
                             }
                             
                             if (response.data.city === "") {
-                                response.data.city = "city unknown";
+                                response.data.city = "(city unknown)";
                             }
                             
                             if (response.data.country === "") {
-                                response.data.country = "country unknown";
+                                response.data.country = "(country unknown)";
                             }
                             
                             if (response.data.objectDate === "") {
-                                response.data.objectDate = "date unknown";
+                                response.data.objectDate = "(date unknown)";
                             }
                             
                             setDisplayPiece(response);
@@ -64,17 +64,31 @@ function DisplayPiece(props){
             };
             
 
-        function sendDisplayPiece() {
+        /*function sendDisplayPiece() {
             return displayPiece;
         }    
+        */
+        
+        const addSave = async() => { //Need to learn how to connect this to another component
+            try {
+                await axios.post("/api/saved", {artID: props.displayPieceID, name: displayPiece.data.title, artist: displayPiece.data.artistDisplayName, imgURL: displayPiece.data.primaryImageSmall});
+            }
+            catch(error) {
+                setError("Error saving item " + error);
+            }
+        };  
         
        useEffect(() => { 
             handleDisplayPiece();
         }, [props.displayPieceID]);
         
          useEffect(() => { 
-            sendDisplayPiece();
-        }, [props.callback]);
+             console.log("trying to save item in Display Piece");
+             console.log("number of saved items" + props.numSaved);
+            if (props.numSaved != 0) {
+                addSave();
+            }
+        }, [props.numSaved]);
         
         return (
            <div>
