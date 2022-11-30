@@ -1,11 +1,47 @@
 import React from 'react';
+import founderImage from "./AbtImgs/founder.jpg"
+import brushImage from "./AbtImgs/brushes.jpg"
+import potteryImage from "./AbtImgs/pottery.jpg"
+import classicalImage from "./AbtImgs/classical.jpg"
+
+
 
 const About = () => {
   return (
     <div className="about-page">
-      <h1>Why Art Discovery?</h1>
-      <h4> Explore the Met's collection of beautiful public domain art in an easy-to-use interface </h4>
       
+      <h1>About Us</h1>
+      <p className="subtitle">Art Discovery is a nonprofit organization commited to helping the world experience art</p>
+
+      <div className="bio">
+        <img src={founderImage}/>
+        <p>Our founder, Jenny Mastovits, saw a problem in her small-town community. There was a lack of love for the arts! As she grew up, 
+        she was enthralled by the fine art she saw in Florence, New York, and Paris. She also grew to love the work of small town artists she came across. 
+        In an effort to bridge the gap, Jenny created Art Discovery to help give everyone a taste of art.  </p>
+      </div>
+      
+      <div className="horizonal-container">
+        <div className="feature tile">
+          <h2>Experience Art Virtually</h2>
+          <img src={classicalImage}/>
+          <p className="subtitle">Everyone should have access to fine art. No matter what in-person opportunities are available, 
+          everyone can experience the fine art of the Met on our explore page </p>
+        </div>
+        
+        <div className="feature tile">
+          <h2>Share Your Creations</h2>
+          <img src={brushImage}/>
+          <p className="subtitle">Many future masterpieces come from small-time artists, many of whom are in remote locations. 
+          Get inspired or share your work on our community blog.</p>
+        </div>
+  
+        <div className="feature tile">
+          <h2>Community Events</h2>
+          <img src={potteryImage}/>
+          <p className="subtitle">Part of art is learning how to create. We partner with local organizations in the Unites States to
+          offer free and reduced cost classes to under priveldged individuals. Check your eligibility and sign up for events here.</p>
+        </div>
+      </div>
     </div>
   );
 }

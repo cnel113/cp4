@@ -109,7 +109,7 @@ function ArtForm() {
     
     useEffect(() => {
         handleFetchCollection();
-        clearSaved(); //NOT SURE IF THIS WILL CAUSE BUGS LATER
+        clearSaved(); 
     },[]);
     
     return (
