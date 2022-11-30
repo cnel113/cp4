@@ -24,16 +24,15 @@ function Saved(props) {
     
   
   return (
-    <div>
+    <div className="saved-container">
       <h2> Saved Items </h2>
         {savedItems?.map(artPiece => (
-          <div key={artPiece.artID} className="saved">
-              <p>{artPiece.name}</p>
+          <div key={artPiece.artID} className="saved-item">
+              <p className="title">{artPiece.name}</p>
               <p>{artPiece.artist}</p>
               <img src={artPiece.imgURL}/>
           </div>
         ))}   
-      
     </div>
   );
 }

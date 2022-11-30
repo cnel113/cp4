@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import About from "./About.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./Navbar.js";
+import Header from "./Header.js";
 import Footer from "./Footer.js";
 import './App.css';
+import ArtForm from "./ArtForm.js";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,9 +19,9 @@ root.render(
       <Routes>
         <Route exact path="/" element={<App/>} />
         <Route path="/about" element={<About/>} />
+        <Route path="/explore" element={<ArtForm/>} />
       </Routes>
     </Router>
-    <h1>Index.js</h1>
     <Footer />
   </React.StrictMode> 
 
@@ -30,17 +31,6 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-/*  <React.StrictMode>
-      <Router>
-      <Header/>
-      <Routes>
-        <Route exact path="/" component={App} />
-        <Route path="/about" component={About} />
-      </Routes>
-    </Router>
-    <Footer />
-  </React.StrictMode> */ //MENU FROM TA NOT WORKING
   
   /*  <React.StrictMode>
     <App/>
