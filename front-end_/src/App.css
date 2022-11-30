@@ -82,6 +82,7 @@ a:hover {
 
 .footer-container h4, a{
     color: black;
+    
 }
 
 .footer-list {
@@ -90,6 +91,18 @@ a:hover {
     align-items: flex-start;
     justify-content: flex-start;
     margin-bottom: 1.5em;
+    
+}
+
+.footer-list a {
+  text-decoration: none;
+  color: #88807B;
+}
+
+.footer-list a:hover { 
+  text-decoration: none; 
+  color: #60100B;
+  
 }
 
 @media only screen and (min-width: 961px) {

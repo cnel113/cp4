@@ -18,7 +18,7 @@ class Footer extends React.Component {
             </div>
             <div className='footer-list'>
                 <h4>Quick Colors</h4>
-                <a href="">About Us</a>
+                <a href="/About.js">About Us</a>
                 <a href="">Affiliates</a>
                 <a href="">Press & Media</a>
                 <a href="">Customer Reviews</a>

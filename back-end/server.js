@@ -32,21 +32,10 @@ mongoose.connect('mongodb://localhost:27017/test', {
   
   let newSavedData = false;
   
-  function pollDOM () {
-    if (newSavedData) {
-      // Do something with el
-      
-    } else {
-      setTimeout(pollDOM, 300); // try again in 300 milliseconds
-    }
-  }
-  
-  pollDOM();
   
   app.get('/api/saved', async(req, res) => {
     async function pollDOM () {
           if (newSavedData) {
-            // Do something with el
             console.log("reading saved data");
             let saved = await SavedArt.find();
              res.send({saved: saved});
@@ -87,7 +76,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
     }
   }); 
   
-  app.delete('/api/saved/:id', async (req, res) => { //Maybe make a delete all? How to delete extra data. 
+  app.delete('/api/saved/:id', async (req, res) => { 
     try {
       await SavedArt.deleteOne({
         artID: req.params.id
