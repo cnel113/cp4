@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import ArtForm from "./ArtForm.js";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Slider from "./Slider/Slider.js";
 
 function App() {
   return (
@@ -9,6 +8,7 @@ function App() {
       <h1> Welcome to Art Discovery </h1>
       <p className="subtitle"> We are commited to helping everyone experience the joy of art </p>
       <img src="#"/>
+      <Slider/>
       <h2>Experience Art from Around the World</h2>
       <p className="subtitle">You can enjoy art from</p>
       <h3>Napels</h3>

@@ -9,6 +9,7 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import './App.css';
 import ArtForm from "./ArtForm.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
