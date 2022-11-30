@@ -13,6 +13,25 @@ import './App.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Router>
+      <Header/>
+      <Routes>
+        <Route exact path="/" element={<App/>} />
+        <Route path="/about" element={<About/>} />
+      </Routes>
+    </Router>
+    <h1>Index.js</h1>
+    <Footer />
+  </React.StrictMode> 
+
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+/*  <React.StrictMode>
       <Router>
       <Header/>
       <Routes>
@@ -21,10 +40,8 @@ root.render(
       </Routes>
     </Router>
     <Footer />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  </React.StrictMode> */ //MENU FROM TA NOT WORKING
+  
+  /*  <React.StrictMode>
+    <App/>
+  </React.StrictMode>*/ //Original method

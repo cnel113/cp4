@@ -96,12 +96,12 @@ a:hover {
 
 .footer-list a {
   text-decoration: none;
-  color: #88807B;
+  color: #88807B; /*gray*/
 }
 
 .footer-list a:hover { 
   text-decoration: none; 
-  color: #60100B;
+  color: #60100B; /*maroon*/
   
 }
 
@@ -147,6 +147,8 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 3em;
+  border-bottom: solid 1px #88807B; /*Gray*/
 }
 
 .search-buttons {
