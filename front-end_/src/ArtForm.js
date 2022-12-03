@@ -121,8 +121,8 @@ function ArtForm() {
             <div className="art-results"> 
                 <DisplayPiece displayPieceID={displayPieceID} numSaved={numSaved}/>
                 <div className="search-buttons"> 
-                    {collection.length != 0 ? <a href="#" className="previous round" onClick={e => handlePrevious(e)}>&#8249;</a> : <p> Loading button </p>}
-                    {collection.length != 0 ? <a href="#" className="next round" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading button </p>}
+                    {collection.length != 0 ? <a href="#" className="round previous" onClick={e => handlePrevious(e)}></a> : <p> Loading button </p>}
+                    {collection.length != 0 ? <a href="#" className="round next" onClick={e => handleNext(e)}>&#8250;</a> : <p> Loading button </p>}
                 </div>
                 {collection.length != 0 ? <button className="save-button" onClick={e => addSave(e)}>Save</button> : <p> loading button </p>}
             </div> 
