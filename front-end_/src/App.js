@@ -4,6 +4,8 @@ import japanImage from "./HomeImgs/japan.jpg"
 import zimbabweImage from "./HomeImgs/zimbabwe.jpg"
 import napelsImage from "./HomeImgs/napels.jpg"
 import moreImage from "./HomeImgs/more.jpg"
+import { NavLink } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -34,9 +36,9 @@ function App() {
       </div>
       
       <h2>Dive in to discovery</h2>
-      <p>Check out our explore page to scroll through the Met's art collection.</p>
-      <p>Interested in a specific area of art? Our department's page has you covered.</p>
-      <p>Want to know more Art Discovery? Check out our About page.</p>
+      <p>Check out our <NavLink to="/explore" className="inline-link">explore page</NavLink>to scroll through the Met's art collection.</p>
+      <p>Interested in a specific area of art? Our <NavLink to="/departments" className="inline-link">departments</NavLink> page has you covered.</p>
+      <p>Want to know more about Art Discovery? Check out our <NavLink to="/about" className="inline-link">about page.</NavLink></p>
     </div>
   );
 }

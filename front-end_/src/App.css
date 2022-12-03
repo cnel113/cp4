@@ -60,6 +60,7 @@ a:hover {
   min-width: 10em;
 }
 
+
 .previous {
   background-color: #88807B; /*gray*/
   color: #1F1E1C; /*black*/
@@ -286,4 +287,10 @@ a:hover {
       max-width: 40%;
       margin-right: 2em;
     }
+}
+
+.inline-link {
+  margin: 0;
+  text-decoration: none;
+  color: #60100B; /*maroon*/
 }
