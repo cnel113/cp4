@@ -1,5 +1,8 @@
 import './App.css';
-import Slider from "./Slider/Slider.js";
+//import Slider from "./Slider/Slider.js";
+import paintbrushesImage from "./HomeImgs/paintbrushes.jpg"
+import abstractartImage from "./HomeImgs/abstractart.jpg"
+import streetartImage from "./HomeImgs/streetart.jpg"
 import japanImage from "./HomeImgs/japan.jpg"
 import zimbabweImage from "./HomeImgs/zimbabwe.jpg"
 import napelsImage from "./HomeImgs/napels.jpg"
@@ -12,8 +15,11 @@ function App() {
     <div className="homepage">
       <h1> Welcome to Art Discovery </h1>
       <p className="subtitle"> We are commited to helping everyone experience the joy of art </p>
-      <img src="#"/>
-      <Slider/>
+      <div className="image-trio-container">
+        <img src={abstractartImage}/>
+        <img src={paintbrushesImage}/>
+        <img src={streetartImage}/>
+      </div>
       <h2>Experience Art from Around the World</h2>
       <div className="feature-container">
         <p className="subtitle">You can enjoy art from</p>

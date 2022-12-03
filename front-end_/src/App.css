@@ -199,6 +199,18 @@ a:hover {
   justify-content: center;
 }
 
+.image-trio-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 4em;
+}
+.image-trio-container img {
+  max-width: 33.33%;
+  max-height: 20em;
+}
+
 .feature-container {
   display: flex;
   flex-direction: column;
