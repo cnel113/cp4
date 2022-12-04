@@ -16,28 +16,27 @@ function App() {
       <h1> Welcome to Art Discovery </h1>
       <p className="subtitle"> We are commited to helping everyone experience the joy of art </p>
       <div className="image-trio-container">
-        <img src={abstractartImage}/>
-        <img src={paintbrushesImage}/>
-        <img src={streetartImage}/>
+        <img src={abstractartImage} alt="decorative abstract art"/>
+        <img src={paintbrushesImage} alt="paintbrushes"/>
+        <img src={streetartImage} alt="decorative street art portrait"/>
       </div>
       <h2>Experience Art from Around the World</h2>
       <div className="feature-container">
-        <p className="subtitle">You can enjoy art from</p>
         <div className="feature">
           <h3>Napels</h3>
-          <img src={napelsImage}/>
+          <img src={napelsImage} alt="classical painting of an angel"/>
         </div>
         <div className="feature">
           <h3>Zimbabwe</h3>
-          <img src={zimbabweImage}/>
+          <img src={zimbabweImage} alt="colorful hand-woven African discs"/>
         </div>
         <div className="feature">
           <h3>Japan</h3>
-          <img src={japanImage}/>
+          <img src={japanImage} alt="japanese characters on bags" />
         </div>
         <div className="feature">
           <h3>and more!</h3>
-          <img src={moreImage}/>
+          <img src={moreImage} alt="computer generated art of hand with ring around it"/>
         </div>
       </div>
       

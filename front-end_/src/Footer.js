@@ -6,22 +6,22 @@ class Footer extends React.Component {
         <div className='footer-container'>
             <div className='footer-list'>
                 <h4>Searching Tools</h4>
-                <a href="">Art History</a>
-                <a href="">Art Departments</a>
-                <a href="">Art Timeline</a>
+                <button>Art History</button>
+                <button>Art Departments</button>
+                <button>Art Timeline</button>
             </div>
             <div className='footer-list'>
                 <h4>Help</h4>
-                <a href="">Customer Support</a>
-                <a href="">FAQ's</a>
-                <a href="https://github.com/cnel113/cp4.git">GIT HUB REPOSITORY</a>
+                <button>Customer Support</button>
+                <button>FAQ's</button>
+                <button href="https://github.com/cnel113/cp4.git">GIT HUB REPOSITORY</button>
             </div>
             <div className='footer-list'>
                 <h4>Quick Colors</h4>
-                <a href="/About.js">About Us</a>
-                <a href="">Affiliates</a>
-                <a href="">Press & Media</a>
-                <a href="">Customer Reviews</a>
+                <button>About Us</button>
+                <button>Affiliates</button>
+                <button>Press & Media</button>
+                <button>Customer Reviews</button>
             </div>
         </div>
         );

@@ -108,12 +108,22 @@ a:hover {
     
 }
 
-.footer-list a {
+.footer-list button {  
+  display: inline-block;
+    border: none;
+    margin: 0;
+    background: #1F1E1C; /*black*/;
+    font-family: sans-serif;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   text-decoration: none;
   color: #88807B; /*gray*/
 }
 
-.footer-list a:hover { 
+.footer-list button:hover { 
   text-decoration: none; 
   color: #60100B; /*maroon*/
   
@@ -271,6 +281,7 @@ a:hover {
   text-decoration: none;
   border: 1px solid #1F1E1C; /*black*/
 }
+
 
 
 @media only screen and (min-width: 961px) {

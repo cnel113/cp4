@@ -9,6 +9,7 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import './App.css';
 import ArtForm from "./ArtForm.js";
+import Events from "./Events.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -21,6 +22,7 @@ root.render(
         <Route exact path="/" element={<App/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/explore" element={<ArtForm/>} />
+        <Route path="/events" element={<Events/>} />
       </Routes>
     </Router>
     <Footer />
