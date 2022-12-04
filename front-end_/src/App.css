@@ -40,6 +40,11 @@
 .artImg {
   max-width: 75%; 
 }
+
+p {
+  color: #1F1E1C; /*black*/
+}
+
 a {
   text-decoration: none;
   display: inline-block;

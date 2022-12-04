@@ -15,14 +15,13 @@ function ArtForm() {
         try {
             const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects";
             const response = axios.get(url);
-            //const public_art = response.filter(item => item.)
             console.log("Fetching Collection");
             return response;
         }
         catch(error) {
             setError("error retrieving art collection" + error);
         }
-    };
+    }
     
     const handleFetchCollection = async() => { 
                 try {

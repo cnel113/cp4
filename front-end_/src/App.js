@@ -1,14 +1,12 @@
 import './App.css';
-//import Slider from "./Slider/Slider.js";
-import paintbrushesImage from "./HomeImgs/paintbrushes.jpg"
-import abstractartImage from "./HomeImgs/abstractart.jpg"
-import streetartImage from "./HomeImgs/streetart.jpg"
-import japanImage from "./HomeImgs/japan.jpg"
-import zimbabweImage from "./HomeImgs/zimbabwe.jpg"
-import napelsImage from "./HomeImgs/napels.jpg"
-import moreImage from "./HomeImgs/more.jpg"
+import paintbrushesImage from "./HomeImgs/paintbrushes.jpg";
+import abstractartImage from "./HomeImgs/abstractart.jpg";
+import streetartImage from "./HomeImgs/streetart.jpg";
+import japanImage from "./HomeImgs/japan.jpg";
+import zimbabweImage from "./HomeImgs/zimbabwe.jpg";
+import napelsImage from "./HomeImgs/napels.jpg";
+import moreImage from "./HomeImgs/more.jpg";
 import { NavLink } from 'react-router-dom';
-
 
 function App() {
   return (

@@ -8,7 +8,7 @@ function DisplayPiece(props){
         
 
         function fetchDisplayPiece() {
-            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;//props.displayPieceID.current
+            const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + props.displayPieceID;
             const response =  axios.get(url);
             return response;
         }
@@ -81,8 +81,7 @@ function DisplayPiece(props){
         
         return (
            <div className="displayPiece">
-                {displayPiece.data ? <img className="artImg"src={displayPiece.data.primaryImageSmall}/> : <p> Art Image: loading </p>}
-                
+                {displayPiece.data ? <img className="artImg"src={displayPiece.data.primaryImageSmall} alt="art piece from the Met"/> : <p> Art Image: loading </p>}
                 <div className="artInfo">
                     {displayPiece.data  ? <p className="artist">Artist: {displayPiece.data.artistDisplayName}</p> : <p> Artist Name: loading </p>}
                     {displayPiece.data  ? <p className="title">Title: {displayPiece.data.title}</p> : <p> Artwork Name: loading </p>}

@@ -1,14 +1,13 @@
-import React from 'react';
 import './Calendar.css';
 import Calendar from 'react-calendar'; 
-import { useState, useEffect, useRef } from 'react';
-import classImg from "./EventsImgs/classes.jpg" 
-import exhibitionImg from "./EventsImgs/exhibition.jpg" 
-import kidImg from "./EventsImgs/kids.jpg" 
+import { useState} from 'react';
+import classImg from "./EventsImgs/classes.jpg";
+import exhibitionImg from "./EventsImgs/exhibition.jpg"; 
+import kidImg from "./EventsImgs/kids.jpg";
 
 
 const Events = () => {
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(new Date());
   return (
     <div className="events-page">
     
@@ -23,7 +22,7 @@ const Events = () => {
       
         <div className="feature">
           <h2>Free or Reduced Cost Classes</h2>
-          <img src={classImg}/>
+          <img src={classImg} alt="adults in a class"/>
           <p className="subtitle">Qualifying individuals get professional art training for free</p>
           <p>If you want to learn how to create art, you should be able to regardless of your circumstance. 
           In select cities we offer free or subsidized classes for people who are low-income, disabled, or have other needs.</p>
@@ -32,7 +31,7 @@ const Events = () => {
         
         <div className="feature">
           <h2>Community Exhibitions</h2>
-          <img src={exhibitionImg}/>
+          <img src={exhibitionImg} alt="sleek art exhibition"/>
           <p className="subtitle">Artists have the opportunity to share art in their local areas.</p>
           <p>Small-town artists and those in less developed areas often lack opportunties for exposure. 
           We solve this by hosting exhibitions across the world where artists can display their art and compete for prizes.</p>
@@ -41,7 +40,7 @@ const Events = () => {
   
         <div className="feature">
           <h2>Children's Events</h2>
-          <img src={kidImg}/>
+          <img src={kidImg} alt="child holding crayons"/>
           <p className="subtitle">Kids get the opportunity to develop their love for art with hands on experience.</p>
           <p>When it comes to art, you can't leave out the kids. We support budding artists with 
           our low-priced curriculums. With supplies and engaging video lessons your kids can explore the world of art.</p>
@@ -49,6 +48,6 @@ const Events = () => {
         </div>
     </div>
   );
-}
+};
 
 export default Events; //Share and Events Buttons are fake links 
