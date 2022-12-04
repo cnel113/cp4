@@ -8,21 +8,18 @@ const Events = () => {
     const [date, setDate] = useState(new Date())
   return (
     <div className="events-page">
-        
-       <h1 className="header">React Calendar</h1>
-       <div className="calendar-container">
-         <Calendar onChange={setDate} value={date}/>
-       </div>
-       <div className="text-center">
-          Selected date: {date.toDateString()}
-       </div>
+    
       
       <h1>Attend Local Events in Your Community</h1>
       <p className="subtitle">The best way to experience art is to make it yourself.</p>
-
+      <p>Check out our calendar of large events</p>
+      <div className="calendar-container">
+        <Calendar onChange={setDate} value={date}/>
+      </div>
+      <p>Selected date: {date.toDateString()}</p>
+      
       <div className="bio">
         <img src="#"/>
-        <p>Check out our calendar of large events</p>
       </div>
       
       <div className="horizonal-container">
