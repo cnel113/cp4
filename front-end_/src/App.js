@@ -42,7 +42,7 @@ function App() {
       
       <h2>Dive in to discovery</h2>
       <p>Check out our <NavLink to="/explore" className="inline-link">explore page</NavLink>to scroll through the Met's art collection.</p>
-      <p>Interested in a specific area of art? Our <NavLink to="/departments" className="inline-link">departments</NavLink> page has you covered.</p>
+      <p>Looking to make your own art? Our <NavLink to="/events" className="inline-link">events</NavLink> page has you covered.</p>
       <p>Want to know more about Art Discovery? Check out our <NavLink to="/about" className="inline-link">about page.</NavLink></p>
     </div>
   );

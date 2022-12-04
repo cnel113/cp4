@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 class Footer extends React.Component {
     render () {
@@ -17,8 +18,8 @@ class Footer extends React.Component {
                 <button href="https://github.com/cnel113/cp4.git">GIT HUB REPOSITORY</button>
             </div>
             <div className='footer-list'>
-                <h4>Quick Colors</h4>
-                <button>About Us</button>
+                <h4>Art Discovery</h4>
+                <button></button>
                 <button>Affiliates</button>
                 <button>Press & Media</button>
                 <button>Customer Reviews</button>
